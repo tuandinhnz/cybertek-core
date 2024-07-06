@@ -7,11 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.1" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Cybertek.Common\Cybertek.Common.csproj" />
       <ProjectReference Include="..\Cybertek.Extensions\Cybertek.Extensions.csproj" />
       <ProjectReference Include="..\Cybertek.Validation\Cybertek.Validation.csproj" />
     </ItemGroup>

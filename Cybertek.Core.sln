@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cybertek.Apis.Common", "Cyb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cybertek.Validation", "Cybertek.Validation\Cybertek.Validation.csproj", "{14BB765D-40A2-4401-A606-72C452AFA338}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cybertek.Common", "Cybertek.Common\Cybertek.Common.csproj", "{58B26A4E-A809-49A7-9E84-D8127698B272}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +56,9 @@ Global
 		{14BB765D-40A2-4401-A606-72C452AFA338}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14BB765D-40A2-4401-A606-72C452AFA338}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14BB765D-40A2-4401-A606-72C452AFA338}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58B26A4E-A809-49A7-9E84-D8127698B272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58B26A4E-A809-49A7-9E84-D8127698B272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58B26A4E-A809-49A7-9E84-D8127698B272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58B26A4E-A809-49A7-9E84-D8127698B272}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
