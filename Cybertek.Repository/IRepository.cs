@@ -4,13 +4,17 @@ using Microsoft.EntityFrameworkCore.Query;
 
 namespace Cybertek.Repository
 {
-    public interface IGenericRepository<T> 
+    public interface IRepository<T> 
         where T : class
     {
+        IQueryable<T> GetQueryable();
+
         Task<T?> FindById(object?[]? keys, CancellationToken cancellationToken = default);
 
         Task<IList<T>> FindMany(IPaginator paginator,
-            IList<Expression<Func<T, bool>>>? conditions = null,
+            Expression<Func<T, bool>>? conditions = null,
+            Expression<Func<T, object>>? orderBy = null,
+            bool descending = false,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? includes = null,
             bool? asNoTracking = false,
             CancellationToken cancellationToken = default);
@@ -23,6 +27,6 @@ namespace Cybertek.Repository
 
         void Remove(T entityToDelete);
 
-        Task SaveChanges(CancellationToken cancellationToken = default);
+        Task<int> SaveChanges(CancellationToken cancellationToken = default);
     }
 }

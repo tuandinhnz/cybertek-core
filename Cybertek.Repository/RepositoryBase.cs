@@ -5,16 +5,21 @@ using Microsoft.EntityFrameworkCore.Query;
 
 namespace Cybertek.Repository;
 
-public class GenericRepository<T> : IGenericRepository<T> 
+public abstract class RepositoryBase<T> : IRepository<T>
     where T : class
 {
     private readonly DbContext _dbContext;
     private readonly DbSet<T> _dbSet;
 
-    public GenericRepository(DbContext dbContext)
+    protected RepositoryBase(DbContext dbContext)
     {
         _dbContext = dbContext;
         _dbSet = dbContext.Set<T>();
+    }
+
+    public IQueryable<T> GetQueryable()
+    {
+        return _dbSet.AsQueryable();
     }
 
     public async Task<T?> FindById(object?[]? keys, CancellationToken cancellationToken = default)
@@ -23,26 +28,30 @@ public class GenericRepository<T> : IGenericRepository<T>
     }
 
     public async Task<IList<T>> FindMany(IPaginator paginator,
-        IList<Expression<Func<T, bool>>>? conditions = null,
-        Func<IQueryable<T>, IIncludableQueryable<T, object>>? includes = null,
+        Expression<Func<T, bool>>? condition = null,
+        Expression<Func<T, object>>? orderBy = null,
+        bool descending = false,
+        Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
         bool? asNoTracking = false,
         CancellationToken cancellationToken = default)
     {
-        int offset = paginator.PageNumber * paginator.Limit;
+        int offset = (paginator.PageNumber - 1) * paginator.Limit;
         int limit = paginator.Limit;
 
         IQueryable<T> queryable = _dbContext.Set<T>();
-        if (conditions != null)
+        if (condition != null)
         {
-            foreach (Expression<Func<T,bool>> condition in conditions)
-            {
-                queryable = queryable.Where(condition);
-            }
+            queryable = queryable.Where(condition);
         }
 
-        if (includes != null)
+        if (include != null)
         {
-            queryable = includes(queryable);
+            queryable = include(queryable);
+        }
+
+        if (orderBy != null)
+        {
+            queryable = descending ? queryable.OrderByDescending(orderBy) : queryable.OrderBy(orderBy);
         }
 
         if (asNoTracking.HasValue && asNoTracking == true)
@@ -53,7 +62,7 @@ public class GenericRepository<T> : IGenericRepository<T>
         queryable = queryable
             .Skip(offset)
             .Take(limit);
-        
+
         return await queryable.ToListAsync(cancellationToken);
     }
 
@@ -77,8 +86,8 @@ public class GenericRepository<T> : IGenericRepository<T>
         _dbSet.Remove(entityToDelete);
     }
 
-    public async Task SaveChanges(CancellationToken cancellationToken = default)
+    public async Task<int> SaveChanges(CancellationToken cancellationToken = default)
     {
-        await _dbContext.SaveChangesAsync(cancellationToken);
+        return await _dbContext.SaveChangesAsync(cancellationToken);
     }
 }
