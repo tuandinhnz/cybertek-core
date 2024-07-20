@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    types:
+      - opened
   workflow_dispatch:
 
 jobs:
@@ -11,11 +14,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "Build begins ..."
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4.1.7
+        with:
+          ref: ${{ github.head_ref }}
 
-      - name: List files in repository
-        run: |
-          echo "The repository ${{ github.repository }} contains the following files:"
-          tree
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v4.0.1
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+        
+      - name: Build
+        run: dotnet build --no-restore
