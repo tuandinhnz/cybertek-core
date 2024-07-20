@@ -14,15 +14,9 @@ namespace Cybertek.Settings.Extensions
             return configurationManager;
         }
 
-        public static AppSettingsBase LoadCybertekConfigurations(this ConfigurationManager configurationManager) 
+        public static IConfigurationSection GetConfigurationsSection(this ConfigurationManager configurationManager) 
         {
-            return configurationManager.GetSection("Cybertek").Get<AppSettingsBase>();
+            return configurationManager.GetSection("Cybertek");
         }
-        
-        public static TSettings LoadCybertekConfigurations<TSettings>(this ConfigurationManager configurationManager) where TSettings : AppSettingsBase, new()
-        {
-            return configurationManager.GetSection("Cybertek").Get<TSettings>();
-        }
-        
     }
 }
