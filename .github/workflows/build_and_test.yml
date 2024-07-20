@@ -1,0 +1,11 @@
+name: Build and Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  BuildJob:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Build begins ..."
