@@ -1,6 +1,9 @@
 name: Build and Test
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -9,3 +12,10 @@ jobs:
 
     steps:
       - run: echo "Build begins ..."
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+
+      - name: List files in repository
+        run: |
+          echo "The repository ${{ github.repository }} contains the following files:"
+          tree
