@@ -4,8 +4,8 @@
         <TargetFramework>net8.0</TargetFramework>
         <PackageId>Cybertek.Validation</PackageId>
         <AssemblyName>Cybertek.Validation</AssemblyName>
-        <PackageVersion>1.0.0</PackageVersion>
-        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <PackageVersion>1.0.0.0</PackageVersion>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
