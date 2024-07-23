@@ -27,6 +27,9 @@ jobs:
         uses: actions/setup-dotnet@v4.0.1
         with:
           dotnet-version: 6.0.x
+          
+      - name: Update package version using run attempt
+        uses: tuandinhnz/my-actions/SetNugetPackageVersion@345e676ca254af044dae366761edb864ad2a1d6c
 
       - name: Restore dependencies
         run: dotnet restore
