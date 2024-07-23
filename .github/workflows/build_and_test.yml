@@ -30,6 +30,3 @@ jobs:
         
       - name: Build
         run: dotnet build --no-restore
-
-      - name: Test step
-        uses: tuandinhnz/my-actions/SetNugetPackageVersion@main
