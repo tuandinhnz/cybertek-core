@@ -20,6 +20,9 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 1
 
+      - name: Print current working directory
+        run: echo Current working directory is ${{github.workspace}}
+
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v4.0.1
         with:
