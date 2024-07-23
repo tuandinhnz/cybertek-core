@@ -29,7 +29,7 @@ jobs:
           dotnet-version: 6.0.x
           
       - name: Update package version using run attempt
-        uses: tuandinhnz/my-actions/SetNugetPackageVersion@345e676ca254af044dae366761edb864ad2a1d6c
+        uses: tuandinhnz/my-actions/SetNugetPackageVersion@7a5760b23e51f9918582c951c77550a308f7db60
 
       - name: Restore dependencies
         run: dotnet restore
