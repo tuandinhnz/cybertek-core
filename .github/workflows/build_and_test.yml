@@ -31,7 +31,7 @@ jobs:
       - name: Update package version using run attempt
         uses: tuandinhnz/my-actions/SetNugetPackageVersion@main
         with:
-          version: ${{github.run_attempt}}
+          version: ${{github.run_id}}
 
       - name: Verify package version
         run: |
