@@ -33,8 +33,16 @@ jobs:
         with:
           version: ${{github.run_attempt}}
 
+      - name: Verify package version
+        run: |
+          echo The current directory is $(pwd)
+          for i in $(find . -type f -iname "*.csproj"); do cat $i; done
+
       - name: Restore dependencies
         run: dotnet restore
         
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Pack
+        run: dotnet pack --configuration Release
