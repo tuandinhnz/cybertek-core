@@ -30,6 +30,8 @@ jobs:
           
       - name: Update package version using run attempt
         uses: tuandinhnz/my-actions/SetNugetPackageVersion@main
+        with:
+          version: ${{github.run_attempt}}
 
       - name: Restore dependencies
         run: dotnet restore
