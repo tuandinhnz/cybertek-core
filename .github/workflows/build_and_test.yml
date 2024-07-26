@@ -66,9 +66,7 @@ jobs:
         
       - name: Publish to Github Package
         run: |
-          ls
-          cd cybertek-core-artifact
-          ls
           dotnet nuget add source --username tuandinhnz --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/tuandinhnz/index.json"
-          dotnet nuget push cybertek-core/*.nupkg --source "github"
+          for pkg in $(find . -iname "*.nupkg"); do dotnet nuget push $pkg --source "github"; done
+          
   
