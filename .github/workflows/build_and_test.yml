@@ -67,6 +67,6 @@ jobs:
       - name: Publish to Github Package
         run: |
           dotnet nuget add source --username tuandinhnz --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/tuandinhnz/index.json"
-          for pkg in $(find . -iname "*.nupkg"); do dotnet nuget push $pkg --source "github"; done
+          for pkg in $(find . -iname "*.nupkg"); do dotnet nuget push $pkg --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"; done
           
   
